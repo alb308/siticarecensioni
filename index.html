@@ -35,7 +35,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden; 
         }
 
         .screen {
@@ -73,8 +73,10 @@
             box-shadow: 0 20px 60px var(--shadow-color);
             max-width: 700px;
             border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative; /* Contiene il bottone */
+            z-index: 10;
         }
-
+        
         .logo {
             max-width: 300px;
             margin: 0 auto 30px;
@@ -116,11 +118,26 @@
             box-shadow: 0 8px 25px rgba(101, 104, 57, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative; /* Rimosso l'absolute per farlo tornare nel flow */
+            z-index: 1; /* Assicura che sia cliccabile */
+            /* Animazione ridotta */
+            animation: subtle-expand-and-contract 2s ease-in-out infinite;
+        }
+
+        /* Nuovi keyframes per un'animazione sottile */
+        @keyframes subtle-expand-and-contract {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.55); /* Ingrandimento leggero */
+            }
         }
 
         .start-button:hover {
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.1); 
             box-shadow: 0 12px 35px rgba(101, 104, 57, 0.4);
+            animation: none; /* Disabilita l'animazione al hover */
         }
 
         .start-button:active {
@@ -320,7 +337,6 @@
     </style>
 </head>
 <body>
-    <!-- Welcome Screen -->
     <div id="welcome-screen" class="screen active">
         <div class="welcome-content">
             <div class="logo">
@@ -331,7 +347,6 @@
         </div>
     </div>
 
-    <!-- Form Container -->
     <div id="form-container" class="screen">
         <div class="container">
             <div class="form-header">
@@ -350,7 +365,6 @@
         </div>
     </div>
 
-    <!-- Thank You Screen -->
     <div id="thankyou-screen" class="screen">
         <div class="thankyou-content">
             <div class="success-icon">✓</div>
